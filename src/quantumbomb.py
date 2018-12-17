@@ -35,16 +35,14 @@ def get_all_probabilities(eng,qureg):
         qubit_list = qubit_list[::-1]
         l = eng.backend.get_probability(qubit_list,qureg)
         if l != 0.0:
-#            print("probability:", l,"state:", qubit_list)
             return(qubit_list)
         i += 1     
             
-def run_once():
+def run_once(number_of_iterations, error = False):
     eng = MainEngine()
     q1 = eng.allocate_qubit()
     q2 = eng.allocate_qubit()
-    error_on = True
-    number_of_iterations = 5
+    error_on = error
     error_rate = 0.1
     angle = rotation_angle(number_of_iterations)
 
@@ -61,18 +59,23 @@ def run_once():
     Measure | q2
     return(state)
 
-def state_count(iterations):
+def state_count(iterations_of_circuit, rotation_iterations = 5):
     state_count_0 = 0
     state_count_1 = 1
 
-    for _ in range(0,iterations):
-        x = run_once()
+    for _ in range(0,iterations_of_circuit):
+        x = run_once(rotation_iterations)
         if x == [0]:
             state_count_0 += 1
         else:
             state_count_1 += 1
-            
+    return(state_count_0)        
     print(state_count_0, 'times 0 was measured')
+
+def state_probability(iterations_of_circuit, rotation_iterations = 5):
+    state_count_0 = state_count(iterations_of_circuit, rotation_iterations)
+    print(state_count_0/iterations_of_circuit, 'times 0 was measured')
+    return(state_count_0/iterations_of_circuit)
 
 if __name__ == '__main__':
 
