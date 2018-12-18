@@ -7,12 +7,12 @@ import numpy
 
 def rotation_angle(number_of_rotations):
     rotation_angle = (numpy.pi) / (number_of_rotations)
-#    print(rotation_angle, "rotation angle")
     return(rotation_angle)
 
 def quantum_bomb(eng, qubit_a, qubit_b):    
     CNOT | (qubit_a, qubit_b)
     Measure | qubit_b
+    
     return(qubit_a, qubit_b)
 
 def pauli_error(eng, qubit_a, error_rate):
@@ -38,7 +38,7 @@ def get_all_probabilities(eng,qureg):
             return(qubit_list)
         i += 1     
             
-def run_once(number_of_iterations, error = False):
+def run_once_without_bombs_exploding(number_of_iterations, error = False):
     eng = MainEngine()
     q1 = eng.allocate_qubit()
     q2 = eng.allocate_qubit()
@@ -64,7 +64,7 @@ def state_count(iterations_of_circuit, rotation_iterations = 5):
     state_count_1 = 1
 
     for _ in range(0,iterations_of_circuit):
-        x = run_once(rotation_iterations)
+        x = run_once_without_bombs_exploding(rotation_iterations)
         if x == [0]:
             state_count_0 += 1
         else:
@@ -77,6 +77,6 @@ def state_probability(iterations_of_circuit, rotation_iterations = 5):
     print(state_count_0/iterations_of_circuit, 'times 0 was measured')
     return(state_count_0/iterations_of_circuit)
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     state_count(500)
