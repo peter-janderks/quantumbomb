@@ -13,7 +13,7 @@ def run_once_with_bombs_exploding(number_of_iterations, error = False):
     angle = rotation_angle(number_of_iterations)
 
 
-    for _ in range(0,number_of_iterations):
+    for x in range(0,number_of_iterations):
         Rx(angle) | q1
         quantum_bomb(eng,q1,q2)
         if error_on == True:
@@ -25,14 +25,29 @@ def run_once_with_bombs_exploding(number_of_iterations, error = False):
         if state_2 == [1]:
             print('booooom')
             break
+    state_1 = get_all_probabilities(eng, q1)    
 
-    print('no bombs exploded')
-    state_1 = get_all_probabilities(eng, q1)
-    if state_1 == [0]:
-        print('it was a real bomb!')
     Measure | q1
     Measure | q2
-    return(state_1)
+
+    if x == number_of_iterations-1 and state_1 == [0]:
+        print('succes, you found a real bomb!')
+        print('no bombs exploded')
+        return('succes')
+    
+    return('fail')
+
+def succes_probability(iterations_of_circuit, rotation_iterations):
+    succes_count = 0
+    for _ in range(0,iterations_of_circuit):
+        x = run_once_with_bombs_exploding(rotation_iterations)
+        if x == 'succes':
+            succes_count += 1
+    succes_prob = succes_count/iterations_of_circuit
+    print(succes_prob, 'times 0 was measured')
+    return(succes_prob)
 
 if __name__ == '__main__':
     run_once_with_bombs_exploding(10)
+
+    print(succes_probability(10,10))
