@@ -17,14 +17,15 @@ def quantum_bomb(eng, qubit_a, qubit_b):
 
 def pauli_error(eng, qubit_a, error_rate):
     if random.random() < error_rate:
-        rand_num = random.random()
-        if rand_num < 1/3:
-            X | qubit_a
-            print('ERROR')
-        elif rand_num > 2/3:
-            Y | qubit_a
-        else:
-            Z | qubit_a
+#        rand_num = random.random()
+#        if rand_num < 1/3
+        X | qubit_a
+        print('Error')
+#            print('ERROR')
+#        elif rand_num > 2/3:
+#            Y | qubit_a
+#        else:
+#            Z | qubit_a
 
     return(qubit_a)
 

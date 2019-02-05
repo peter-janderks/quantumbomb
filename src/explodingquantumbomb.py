@@ -11,13 +11,15 @@ def run_once_with_bombs_exploding(number_of_iterations, error = False):
     error_on = error
     error_rate = 0.1
     angle = rotation_angle(number_of_iterations)
-
+    errors = 0
 
     for x in range(0,number_of_iterations):
+        if error_on == True:
+            q1 = pauli_error(eng,q1,error_rate)
+        print(angle)
         Rx(angle) | q1
         quantum_bomb(eng,q1,q2)
-        if error_on == True:
-            pauli_error(eng,q1,error_rate)
+        errors += 1
 
         eng.flush()
         state_2 = get_all_probabilities(eng, q2)
