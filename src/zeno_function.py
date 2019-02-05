@@ -1,7 +1,6 @@
 import numpy as np
 from matplotlib import pyplot as plt
 
-
 K = 50
 def zeno_function(n):
     return (1+ (1-2*np.sin(np.pi/2/n)**2)**(n))/2
