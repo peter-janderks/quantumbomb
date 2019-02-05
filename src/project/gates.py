@@ -1,9 +1,8 @@
-from projectq.ops import H, Measure, X, Rx, CNOT, Y, Z
+from projectq.ops import CNOT, Measure, X
 from projectq import MainEngine
 from projectq.backends._sim._simulator import Simulator
 
 import random
-import numpy
 
 def quantum_bomb(eng, qubit_a, qubit_b):
     CNOT | (qubit_a, qubit_b)
