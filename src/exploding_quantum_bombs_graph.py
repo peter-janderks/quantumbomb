@@ -1,4 +1,4 @@
-from run_circuits import succes_probability
+from project.run_circuits import succes_probability
 import matplotlib.pyplot as plt
 
 if __name__ == '__main__':

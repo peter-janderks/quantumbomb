@@ -1,8 +1,8 @@
 from projectq.ops import H, Measure, X, Rx, CNOT, Y, Z
 from projectq import MainEngine
 from projectq.backends._sim._simulator import Simulator
-from gates import quantum_bomb, pauli_error
-from util import rotation_angle, get_all_probabilities
+from .gates import quantum_bomb, pauli_error
+from .util import rotation_angle, get_all_probabilities
 
 import random
 import numpy

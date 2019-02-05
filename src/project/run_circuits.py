@@ -1,6 +1,6 @@
 from projectq import MainEngine
 from projectq.backends._sim._simulator import Simulator
-from circuits import circuit_without_bombs_exploding, circuit_with_bombs_exploding
+from .circuits import circuit_without_bombs_exploding, circuit_with_bombs_exploding
 
 
 # runs the circuit without bombs exploding multiple times and keeps track of
