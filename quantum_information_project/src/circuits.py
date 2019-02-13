@@ -31,7 +31,7 @@ def circuit_without_bombs_exploding(number_of_iterations, noise = False, error_r
     eng.flush()
     return(state)
 
-def circuit_with_bombs_exploding(number_of_iterations, noise = False, error_rate = 0):
+def circuit_with_bombs_exploding(number_of_iterations, error_rate = 0):
 
     eng = MainEngine()
     q1 = eng.allocate_qubit()
@@ -41,13 +41,12 @@ def circuit_with_bombs_exploding(number_of_iterations, noise = False, error_rate
 
     for x in range(0,number_of_iterations):
 
-        if noise == True:
+        if error_rate != 0:
             q1 = pauli_error(eng,q1,error_rate)
         
         # rotate qubit and send through bomb  
         Rx(angle) | q1
         quantum_bomb(eng,q1,q2)
-        errors += 1
         eng.flush()        
         state_2 = get_all_probabilities(eng, q2)
         

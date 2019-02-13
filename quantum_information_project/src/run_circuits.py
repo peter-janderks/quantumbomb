@@ -31,19 +31,15 @@ def state_probability(iterations_of_circuit, rotation_iterations = 5):
 
 # runs the circuit with bombs exploding multiple times using the state_count
 # function. Calculates the average probability of succesfully detecting a bomb
-# (without the bomb exploding) 
-def succes_probability(iterations_of_circuit, rotation_iterations, error=False):
+# (with the bomb exploding) 
+def succes_probability(iterations_of_circuit, rotation_iterations, error=0):
     succes_count = 0
-    if error==False:
-        for _ in range(0,iterations_of_circuit):
-            x = circuit_with_bombs_exploding(rotation_iterations,)
-            if x == 'succes':
-                succes_count += 1
-    elif error:
-        for _ in range(0,iterations_of_circuit):
-            x = circuit_with_bombs_exploding(rotation_iterations, True, error)
-            if x == 'succes':
-                succes_count += 1
+
+    for _ in range(0,iterations_of_circuit):
+        x = circuit_with_bombs_exploding(rotation_iterations, error)
+        if x == 'succes':
+             succes_count += 1
+
     succes_prob = succes_count/iterations_of_circuit
     print(succes_prob, 'times 0 was measured')
     return(succes_prob)

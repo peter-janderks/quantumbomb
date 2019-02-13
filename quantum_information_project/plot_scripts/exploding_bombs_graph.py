@@ -13,4 +13,7 @@ if __name__ == '__main__':
     plt.plot(x_axis, y_axis)
     plt.ylabel('probability of detecting a bomb (with exploding')
     plt.xlabel('number of rotation gates')
+
+def cos_function(n):
+    return (np.cos(np.pi/(2*n))**n)
 plt.show()
